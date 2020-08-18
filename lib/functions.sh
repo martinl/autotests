@@ -144,7 +144,7 @@ function wait_for_board
 		# wait for a board for a while
 		i=1
 		while ! ping -c1 $USER_HOST &>/dev/null; do
-			display_alert "Ping $USER_HOST failed $i" "$(date  +%R:%S)" "info"
+			display_alert "Ping $USER_HOST failed $i" "$(date  +%R:%S)" "wrn"
 			sleep 10
 			i=$(( $i + 1 ))
 			# give up after 50s
