@@ -10,8 +10,8 @@ if [[ $? -eq 0 ]]; then
 
 display_alert "$(basename $BASH_SOURCE)" "$(date  +%R:%S)" "info"
 ssh-keygen -qf "$HOME/.ssh/known_hosts" -R "${USER_HOST}" > /dev/null 2>&1
-sshpass -p 1234 ssh -o "StrictHostKeyChecking=no" ${USER_ROOT}@${USER_HOST} "\x03" &>/dev/null
-if [[ $? -eq 1 ]]; then
+sshpass -p 1234 ssh -o "StrictHostKeyChecking=no" ${USER_ROOT}@${USER_HOST} "ls" &>/dev/null
+if [[ $? -eq 0 ]]; then
 	# clean keys
 	# pass user creation to expect
 	display_alert "Conduct first login steps" "root/${PASS_ROOT} and ${USER_NORMAL}/${PASS_NORMAL}" "info"
@@ -23,7 +23,7 @@ if [[ $? -eq 1 ]]; then
 	send \"${PASS_ROOT}\r\"
 	expect \"Repeat password:\"
 	send \"${PASS_ROOT}\r\"
-	expect \"Do you want to set locales and console keyboard automatically from your location [Y/n]:\"
+	expect \"Do you want to set locales and console keyboard automatically from your location \[Y/n\]:\"
 	send \"Y\r\"
 	expect \"(eg. your forename):\"
 	send \"${USER_NORMAL}\r\"
