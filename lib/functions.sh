@@ -37,6 +37,14 @@ function remote_exec(){
 		sleep 1; f=$(( $f + 1 )); [[ $f -gt 5 ]] && return 1
 	done
 	[[ $? -eq 0 ]] && timeout $TIMEOUT sshpass -p ${PASS_ROOT} ssh ${2} ${USER_ROOT}@${USER_HOST} "${1}" 2> /dev/null
+	#if [ $? -eq 5 ]; then
+	#	echo "Password incorrect"
+	#	exit
+	#fi
+	#if [ $? -eq 6 ]; then
+	#	echo ".known_hosts issue"
+	#	exit
+	#fi
 
 }
 
